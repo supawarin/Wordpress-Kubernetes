@@ -6,7 +6,9 @@ metadata:
     app: wordpress
 spec:
   ports:
-    - port: 80 #kubectl port-forward service/wordpress 32393:80
+    - port: 80 
+      targetPort: 80
+      nodePort: 31977
   selector:
     app: wordpress
     tier: frontend
