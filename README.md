@@ -4,57 +4,57 @@ wordpress run on kubernetes demo with mysql and phpmyadmin
 
 ## Clone this project
 
-   git clone https://github.com/supawarin/Wordpress-Kubernetes.git
+     git clone https://github.com/supawarin/Wordpress-Kubernetes.git
 
 
 ## Run project
 
 ### 1. Run wp-secret.yaml
 
-   kubectl apply -f wp-secret.yaml
+     kubectl apply -f wp-secret.yaml
    
 check it : kubectl get secret
 
 
 ### 2. Run mysql-wp.yaml
 
-   kubectl apply -f mysql-wp.yaml
+     kubectl apply -f mysql-wp.yaml
    
    
 ### 3. Run wordpress-deployment.yaml
 
-   kubectl apply -f wordpress-deployment.yaml
+     kubectl apply -f wordpress-deployment.yaml
    
    
 ### 4. Run phpmyadmin-wp.yaml
 
-   kubectl apply -f phpmyadmin-wp.yaml
+     kubectl apply -f phpmyadmin-wp.yaml
    
 
 Check it : 
 
-   kubectl get pods
+     kubectl get pods
    
-   kubectl get svc
+     kubectl get svc
    
-   kubectl get pvc
+     kubectl get pvc
    
 
 # Wordpress-Kubernetes use Helm chart
 
 ## Clone this project
 
-   git clone https://github.com/supawarin/Wordpress-Kubernetes.git
+     git clone https://github.com/supawarin/Wordpress-Kubernetes.git
    
 ## Run project
 
-   helm install wp-test -f values-test.yaml ./
+     helm install wp-test -f values-test.yaml ./
    
    
-   helm install wp-dev -f values-dev.yaml ./
+     helm install wp-dev -f values-dev.yaml ./
    
    
-   helm install wp-prod -f values-prod.yaml ./
+     helm install wp-prod -f values-prod.yaml ./
    
    
    
@@ -72,7 +72,7 @@ Select language and continue
 
 Set up new user and password
 
-    ![1_trwL4Wne-cAZLlCOiLzgSw](https://user-images.githubusercontent.com/83863431/189278045-b64237a6-4c89-4ff6-a31f-29a5d717130b.png)
+   ![1_trwL4Wne-cAZLlCOiLzgSw](https://user-images.githubusercontent.com/83863431/189278045-b64237a6-4c89-4ff6-a31f-29a5d717130b.png)
 
    
 Login use new user & password
