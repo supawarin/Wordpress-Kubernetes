@@ -1,0 +1,34 @@
+# mysql service
+apiVersion: v1
+kind: Service
+metadata:
+  name: wp-db-{{ .Values.env }}  #host
+  labels:
+    app: wp-{{ .Values.env }}
+spec:
+  ports:
+    - name: wp-db-{{ .Values.env }}
+      port: 3306
+      targetPort: 3306 
+  selector:
+    app: wp-{{ .Values.env }}
+    tier: mysql
+  
+
+# wordpress service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wp-{{ .Values.env }}
+  labels:
+    app: wp-{{ .Values.env }}
+spec:
+  ports:
+    - port: 80 
+      targetPort: 80
+      nodePort: {{ .Values.svcAccessPort }}
+  selector:
+    app: wp-{{ .Values.env }}
+    tier: frontend
+  type: NodePort

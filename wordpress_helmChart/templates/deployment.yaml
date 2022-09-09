@@ -1,0 +1,78 @@
+# mysql deployment
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: wp-db-{{ .Values.env }}
+  labels:
+    app: wp-{{ .Values.env }}
+spec:
+  selector:
+    matchLabels:
+      app: wp-{{ .Values.env }}
+      tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wp-{{ .Values.env }}
+        tier: mysql
+    spec:
+      containers:
+      - image: mariadb:latest
+        name: mysql-{{ .Values.env }}
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: {{ .Values.password }}
+
+        ports:
+        - containerPort: 3306
+          name: mysql-{{ .Values.env }}
+        volumeMounts:
+        - name: wp-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: wp-persistent-storage
+        persistentVolumeClaim:
+          claimName: wpdb-claim-{{ .Values.env }}
+
+
+# wordpress deployment
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: wp-{{ .Values.env }}
+  labels:
+    app: wp-{{ .Values.env }}
+spec:
+  selector:
+    matchLabels:
+      app: wp-{{ .Values.env }}
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wp-{{ .Values.env }}
+        tier: frontend
+    spec:
+      containers:
+      - image: wordpress:4.8-apache
+        name: wp-{{ .Values.env }}
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: wp-db-{{ .Values.env }}
+        - name: WORDPRESS_DB_PASSWORD
+          value: {{ .Values.password }}
+        ports:
+        - containerPort: 80
+          name: wp-{{ .Values.env }}
+        volumeMounts:
+        - name: wp-persistent-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: wp-persistent-storage
+        persistentVolumeClaim:
+          claimName: wp-claim-{{ .Values.env }}

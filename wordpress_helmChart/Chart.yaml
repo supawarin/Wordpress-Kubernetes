@@ -1,0 +1,48 @@
+# wordpress chart
+apiVersion: v2
+name: wordpress
+version:  14.0.4
+appVersion: 4.8-apache
+# The wordpress chart is deprecated and no longer maintained. For details deprecation, see the PROCESSES.md file.
+deprecated: true
+keywords:
+- wordpress
+- cms
+- blog
+- wp
+- http
+- web
+- application
+- php
+home: https://wordpress.org
+icon: https://bitnami.com/assets/stacks/wordpress/img/wordpress-stack-220x234.png
+sources:
+  - https://github.com/bitnami/bitnami-docker-wordpress
+maintainers: []
+
+
+
+
+
+
+
+# mysql chart
+---
+apiVersion: v2
+name: mariadb
+version: 7.3.14
+appVersion: latest
+# The mariadb chart is deprecated and no longer maintained. For details deprecation, see the PROCESSES.md file.
+deprecated: true
+keywords:
+  - mariadb
+  - mysql
+  - database
+  - sql
+  - prometheus
+home: https://mariadb.org
+icon: https://bitnami.com/assets/stacks/mariadb/img/mariadb-stack-220x234.png
+sources:
+  - https://github.com/bitnami/bitnami-docker-mariadb
+  - https://github.com/prometheus/mysqld_exporter
+maintainers: []

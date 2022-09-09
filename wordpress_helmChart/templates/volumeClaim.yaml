@@ -1,0 +1,28 @@
+# mysql pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wpdb-claim-{{ .Values.env }}
+  labels:
+    app: wp-{{ .Values.env }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+
+# wordpress pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wp-claim-{{ .Values.env }}
+  labels:
+    app: wp-{{ .Values.env }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
